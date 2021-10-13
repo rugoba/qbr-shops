@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = exports['qbr-core']:GetCoreObject()
 
 function DrawText3Ds(x, y, z, text)
     local onScreen,_x,_y=GetScreenCoordFromWorldCoord(x, y, z)
@@ -31,7 +31,7 @@ CreateThread(function()
                         if IsControlJustPressed(0, 0xCEFD9220) then -- E
                             local ShopItems = {}
                             ShopItems.items = {}
-                            QBCore.Functions.TriggerCallback('qb-shops:server:getLicenseStatus', function(result)
+                            QBCore.Functions.TriggerCallback('qbr-shops:server:getLicenseStatus', function(result)
                                 ShopItems.label = Config.Locations[shop]["label"]
                                 if Config.Locations[shop].type == "weapon" then
                                     if result then
@@ -61,18 +61,18 @@ CreateThread(function()
     end
 end)
 
-RegisterNetEvent('qb-shops:client:UpdateShop')
-AddEventHandler('qb-shops:client:UpdateShop', function(shop, itemData, amount)
-    TriggerServerEvent('qb-shops:server:UpdateShopItems', shop, itemData, amount)
+RegisterNetEvent('qbr-shops:client:UpdateShop')
+AddEventHandler('qbr-shops:client:UpdateShop', function(shop, itemData, amount)
+    TriggerServerEvent('qbr-shops:server:UpdateShopItems', shop, itemData, amount)
 end)
 
-RegisterNetEvent('qb-shops:client:SetShopItems')
-AddEventHandler('qb-shops:client:SetShopItems', function(shop, shopProducts)
+RegisterNetEvent('qbr-shops:client:SetShopItems')
+AddEventHandler('qbr-shops:client:SetShopItems', function(shop, shopProducts)
     Config.Locations[shop]["products"] = shopProducts
 end)
 
-RegisterNetEvent('qb-shops:client:RestockShopItems')
-AddEventHandler('qb-shops:client:RestockShopItems', function(shop, amount)
+RegisterNetEvent('qbr-shops:client:RestockShopItems')
+AddEventHandler('qbr-shops:client:RestockShopItems', function(shop, amount)
     if Config.Locations[shop]["products"] ~= nil then 
         for k, v in pairs(Config.Locations[shop]["products"]) do 
             Config.Locations[shop]["products"][k].amount = Config.Locations[shop]["products"][k].amount + amount
