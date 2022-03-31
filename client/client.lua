@@ -1,4 +1,4 @@
-local QBCore = exports['qbr-core']:GetCoreObject()
+
 
 Citizen.CreateThread(function()
     for store, v in pairs(Config.Locations) do
@@ -14,7 +14,7 @@ Citizen.CreateThread(function()
                 SetBlipScale(StoreBlip, 0.2)
             elseif v.products == "weapons" then
                 SetBlipSprite(StoreBlip, -145868367, 1)
-                SetBlipScale(StoreBlip, 0.2)     
+                SetBlipScale(StoreBlip, 0.2)
             elseif v.products == "saloon" then
                 SetBlipSprite(StoreBlip, 1879260108, 1)
                 SetBlipScale(StoreBlip, 0.2)
@@ -23,7 +23,7 @@ Citizen.CreateThread(function()
                 SetBlipScale(StoreBlip, 0.2)
             end
         end
-    end     
+    end
 end)
 
 RegisterNetEvent('qbr-shops:openshop')
@@ -32,7 +32,7 @@ AddEventHandler('qbr-shops:openshop', function(shopType, shopName)
     local shop = shopName
     local ShopItems = {}
     ShopItems.items = {}
-    QBCore.Functions.TriggerCallback('qbr-shops:server:getLicenseStatus', function(result)
+    exports['qbr-core']:TriggerCallback('qbr-shops:server:getLicenseStatus', function(result)
         ShopItems.label = shop
         if type == "weapon" then
             if result then
@@ -67,8 +67,8 @@ AddEventHandler('qbr-shops:client:RestockShopItems', function(shopType, amount)
     print('RESTOCK FUNCTION')
     print(shopType)
     print(amount)
-    if Config.Products[shopType] ~= nil then 
-        for k, v in pairs(Config.Products[shopType]) do 
+    if Config.Products[shopType] ~= nil then
+        for k, v in pairs(Config.Products[shopType]) do
             Config.Products[shopType][k].amount = Config.Products[shopType][k].amount + amount
         end
     end
