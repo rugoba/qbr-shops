@@ -2,7 +2,7 @@
 
 Citizen.CreateThread(function()
     for store, v in pairs(Config.Locations) do
-        exports['qbr-prompts']:createPrompt(v.name, v.coords, 0xF3830D8E, 'Open ' .. v.name, {
+        exports['qbr-core']:createPrompt(v.name, v.coords, 0xF3830D8E, 'Open ' .. v.name, {
             type = 'client',
             event = 'qbr-shops:openshop',
             args = {v.products, v.name},
